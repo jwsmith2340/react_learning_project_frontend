@@ -6,13 +6,9 @@ function App() {
   // Set up useState
   const [ data, setData ] = useState(null);
 
-  let [ count, setCount ] = useState(0)
-
   // Import backend URL
   const url = 'http://localhost:3030/test'
 
-  
-  
   // Fetch data from backend
   // At some point after GA, you now have to declare and call the useEffect function
   // from within the useEffect call itself like this. 
@@ -24,38 +20,47 @@ function App() {
     }
     getData()}, []);
 
+  function MyButton() {
+    const [count, setCount] = useState(0)
+
     function handleClick() {
-      setCount(count = count + 1)
+      setCount(count + 1)
     }
 
-    function loaded() {
-      return(
-        <>
-          <h1>{data.data}</h1>
-          <ul>
-            {data.array.map(array_item => {
-              return(
-                <li>
-                  {array_item.title}
-                </li>
-              )
-            })}
-          </ul>
-          <button onClick={handleClick}>
-            Click Me
-          </button>
-          <h3>{count}</h3>
-        </>
-      )
-    }
+    return(
+      <>
+        <button onClick={handleClick}>
+          Click Me Idiot
+        </button>
+        <h4>{count}</h4>
+      </>
+    )
+  }
 
-    function loading() {
-      return(
-        <h1>LOADING...</h1>
-      )
-    }
+  function loaded() {
+    return(
+      <>
+        <h1>{data.data}</h1>
+        <ul>
+          {data.array.map(array_item => {
+            return(
+              <li>
+                {array_item.title}
+              </li>
+            )
+          })}
+        </ul>
+        <MyButton />
+      </>
+    )
+  }
+
+  function loading() {
+    return(
+      <h1>LOADING...</h1>
+    )
+  }
     
-
   return (
     <>
       {data ? loaded() : loading()}
